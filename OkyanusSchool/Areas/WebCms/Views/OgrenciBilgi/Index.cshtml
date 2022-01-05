@@ -1,0 +1,35 @@
+﻿@model IEnumerable<OkyanusSchool.Models.BLL.OgrenciBilgi>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
+}
+
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">AD</th>
+            <th scope="col">SOYAD</th>
+            <th scope="col">TC_KIMLIK</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.ID</th>
+                <td>@Html.DisplayFor(modelItem => item.AD)</td>
+                <td>@item.SOYAD</td>
+                <td>@item.TC_KIMLIK</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form asp-action="OgrBilgi2">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input  name="ISLEM" value="1" />
+    <div class="form-group">
+        <input type="submit" value="Goster" class="btn btn-primary" />
+    </div>
+</form>

@@ -1,0 +1,55 @@
+﻿@using OkyanusSchool.Models.VM
+@model OgrenciListVM  
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
+}
+
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">AD</th>
+            <th scope="col">SOYAD</th>
+            <th scope="col">TC_KIMLIK</th>
+            <th scope="col">DOGUM_TARIHI</th>
+            <th scope="col">DOGUM_YERI</th>
+            <th scope="col">CEP_TELEFONU</th>
+            <th scope="col">EV_TELEFONU</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">UYRUK</th>
+            <th scope="col">GUNCEL_TARIH</th>
+            <th scope="col">ILK_KAYIT</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (TempData["Orgs"] != null)
+        {
+            @foreach (var item in Model.OgrenciBilgis)
+            {
+        <tr>
+            <th scope="row">@item.ID</th>
+            <td>@item.AD</td>
+            <td>@item.SOYAD</td>
+            <td>@item.TC_KIMLIK</td>
+            <td>@item.DOGUM_TARIHI</td>
+            <td>@item.DOGUM_YERI</td>
+            <td>@item.CEP_TELEFONU</td>
+            <td>@item.EV_TELEFONU</td>
+            <td>@item.EMAIL</td>
+            <td>@item.UYRUK</td>
+            <td>@item.GUNCEL_TARIH</td>
+            <td>@item.ILK_KAYIT</td>
+        </tr>
+            }
+        }
+    </tbody>
+</table>
+<form method="post" asp-action="OgrBilgi2">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input hidden name="ISLEM" value="1" />
+    <div class="form-group">
+        <input type="submit" value="Goster" class="btn btn-primary" />
+    </div>
+</form>

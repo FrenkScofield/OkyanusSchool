@@ -32,18 +32,29 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
             if (TempData["Orgs"] != null)
             {
                  ogrenciListesi = JsonConvert.DeserializeObject<OgrenciBilgi[]>(TempData["Orgs"].ToString());
-
-            }
+          
+            return View( await _context.OgrenciBilgis.ToListAsync());
+        }
 
 
             _ogrenciListVM.OgrenciBilgis = ogrenciListesi;
             return View(_ogrenciListVM);
         }
 
-        
+        //    List<SqlParameter> parms = new List<SqlParameter>
+        //    {
+        //new SqlParameter { ParameterName = "@ISLEM", Value = ISLEM }
+        //    };
+        //    list = _context.OgrenciBilgis.FromSqlRaw<OgrenciBilgi>(sql, parms.ToArray()).ToList();
+
+        //    // Debugger.Break();
+
+        //    return View("Index");
+        //}
         [HttpPost]
         public IActionResult OgrBilgi2(int? ISLEM)
         {
+            var param = new SqlParameter("@ISLEM", ISLEM);
 
             List<SqlParameter> param = new List<SqlParameter>
             {
@@ -64,8 +75,8 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
                     Direction = ParameterDirection.Input,
                     IsNullable = true,
                     Value = DBNull.Value
-
-                }
+          
+        }
             };
 
             string sql = $"EXEC sp_OgrenciBilgi @ISLEM, @ID";
@@ -75,10 +86,12 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
             _ogrenciListVM.OgrenciBilgis = ogr.ToArray();
 
             TempData["Orgs"] = JsonConvert.SerializeObject(_ogrenciListVM.OgrenciBilgis); ;
-            
+
             return RedirectToAction("Index"); ;
 
         }
-          
-    }
+
+            //    return View (ISLEM);
+            //}
+        }
 }

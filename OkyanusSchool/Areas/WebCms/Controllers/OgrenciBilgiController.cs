@@ -29,24 +29,21 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
         public async Task<IActionResult> Index()
         {
             OgrenciBilgi[] ogrenciListesi = null;
+
             if (TempData["Orgs"] != null)
             {
                  ogrenciListesi = JsonConvert.DeserializeObject<OgrenciBilgi[]>(TempData["Orgs"].ToString());
           
-            
             }
-
-
             _ogrenciListVM.OgrenciBilgis = ogrenciListesi;
+
             return View(_ogrenciListVM);
         }
 
         [HttpPost]
-        public IActionResult OgrBilgi2(int? ISLEM)
+        public IActionResult PullOgrenciBilgi(int? ISLEM)
         {
-            //  var param = new SqlParameter("@ISLEM", ISLEM);
-
-            // List<SqlParameter> param = new List<SqlParameter>
+         
             SqlParameter[] param = new SqlParameter[] 
             {
                 
@@ -59,6 +56,7 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
                     Value = ISLEM
 
                 },
+
                 new SqlParameter()
                 {
                     ParameterName = "ID",
@@ -67,7 +65,7 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
                     IsNullable = true,
                     Value = DBNull.Value
           
-        }
+                }
             };
 
             string sql = $"EXEC sp_OgrenciBilgi @ISLEM, @ID";
@@ -80,6 +78,12 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
 
             return RedirectToAction("Index"); ;
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateOgrenciBilgi()
+        {
+            return View();
         }
     }
 }

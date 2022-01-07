@@ -126,6 +126,11 @@
                 <div id="clincs" class="collapse" aria-labelledby="clincs" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Kişi seç:</h6>
+                        <form method="post" asp-area="WebCms" asp-controller="OgrenciBilgi" asp-action="PullOgrenciBilgi">
+                            <input hidden name="ISLEM" value="1" />
+                                <input type="submit" value="Öğrençi bilgi" class="collapse-item" />
+                           
+                        </form>
                         <a class="collapse-item" asp-area="WebCms" asp-controller="OgrenciBilgi" asp-action="Index">Öğrençi bilgi</a>
                         <a class="collapse-item" asp-area="WebCms" asp-controller="VeliBilgi" asp-action="Index">Veli bilgi </a>
                         <a class="collapse-item" asp-area="WebCms" asp-controller="OgretmenBilgi" asp-action="Index">Öğretmen bilgi </a>

@@ -1,4 +1,5 @@
-﻿@model OkyanusSchool.Models.VM.ViewModel
+﻿@model OkyanusSchool.Models.BLL.OgrenciBilgi
+
 @{
     ViewData["Title"] = "CreateOgrenciBilgi";
     Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
@@ -19,61 +20,62 @@
                         <fieldset class="radiogenel">
                             <legend style="width: 24%;">Öğrenci özel bilgileri</legend>
                             <div class="form-group">
-                                <label asp-for="OgrenciBilgi.AD" class="control-label">İsim</label>
-                                <input type="text" asp-for="OgrenciBilgi.AD" class="form-control" required />
-                                <span asp-validation-for="OgrenciBilgi.AD" class="text-danger"></span>
+                                <label asp-for="AD" class="control-label">İsim</label>
+                                <input type="text" asp-for="AD" class="form-control" required />
+                                <span asp-validation-for="AD" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="OgrenciBilgi.SOYAD" class="control-label">Soyisim</label>
-                                <input type="text" asp-for="OgrenciBilgi.SOYAD" class="form-control" required />
-                                <span asp-validation-for="OgrenciBilgi.SOYAD" class="text-danger"></span>
+                                <label asp-for="SOYAD" class="control-label">Soyisim</label>
+                                <input type="text" asp-for="SOYAD" class="form-control" required />
+                                <span asp-validation-for="SOYAD" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="OgrenciBilgi.TC_KIMLIK" class="control-label">TC kimlik</label>
-                                <input type="text" asp-for="OgrenciBilgi.TC_KIMLIK" class="form-control" required />
-                                <span asp-validation-for="OgrenciBilgi.TC_KIMLIK" class="text-danger"></span>
+                                <label asp-for="TC_KIMLIK" class="control-label">TC kimlik</label>
+                                <input type="text" asp-for="TC_KIMLIK" class="form-control"  maxlength="11" required="required" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                <span asp-validation-for="TC_KIMLIK" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="OgrenciBilgi.DOGUM_TARIHI" class="control-label">Doğum tarihi</label>
-                                <input type="text" asp-for="OgrenciBilgi.DOGUM_TARIHI" class="form-control" required />
-                                <span asp-validation-for="OgrenciBilgi.DOGUM_TARIHI" class="text-danger"></span>
+                                <label asp-for="DOGUM_TARIHI" class="control-label">Doğum tarihi</label>
+                                <input type="date" asp-for="DOGUM_TARIHI"  class="form-control" required />
+                                <span asp-validation-for="DOGUM_TARIHI" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="OgrenciBilgi.DOGUM_YERI" class="control-label">Doğum yeri</label>
-                                <input type="text" asp-for="OgrenciBilgi.DOGUM_YERI" class="form-control" required />
-                                <span asp-validation-for="OgrenciBilgi.DOGUM_YERI" class="text-danger"></span>
+                                <label asp-for="DOGUM_YERI" class="control-label">Doğum yeri</label>
+                                <input type="text" asp-for="DOGUM_YERI" class="form-control" required />
+                                <span asp-validation-for="DOGUM_YERI" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="OgrenciBilgi.CEP_TELEFONU" class="control-label">Çeb telefonu</label>
-                                <input type="text" asp-for="OgrenciBilgi.CEP_TELEFONU" class="form-control" required />
-                                <span asp-validation-for="OgrenciBilgi.CEP_TELEFONU" class="text-danger"></span>
+                                <label asp-for="CEP_TELEFONU" class="control-label">Çeb telefonu</label>
+                                <input type="text" asp-for="CEP_TELEFONU" class="form-control"  maxlength="11" required="required" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                <span asp-validation-for="CEP_TELEFONU" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="OgrenciBilgi.EV_TELEFONU" class="control-label">Ev telefonu</label>
-                                <input type="text" asp-for="OgrenciBilgi.EV_TELEFONU" class="form-control" required />
-                                <span asp-validation-for="OgrenciBilgi.EV_TELEFONU" class="text-danger"></span>
+                                <label asp-for="EV_TELEFONU" class="control-label">Ev telefonu</label>
+                                <input type="text" asp-for="EV_TELEFONU" class="form-control"  maxlength="11"  pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                <span asp-validation-for="EV_TELEFONU" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="OgrenciBilgi.EMAIL" class="control-label">Email</label>
-                                <input type="text" asp-for="OgrenciBilgi.EMAIL" class="form-control" required />
-                                <span asp-validation-for="OgrenciBilgi.EMAIL" class="text-danger"></span>
+                                <label asp-for="EMAIL" class="control-label">Email</label>
+                                <input type="email" asp-for="EMAIL" class="form-control" required />
+                                <span asp-validation-for="EMAIL" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="OgrenciBilgi.UYRUK" class="control-label">Uyruk</label>
-                                <input type="text" asp-for="OgrenciBilgi.UYRUK" class="form-control" required />
-                                <span asp-validation-for="OgrenciBilgi.UYRUK" class="text-danger"></span>
+                                <label asp-for="UYRUK" class="control-label">Uyruk</label>
+                                <input type="text" asp-for="UYRUK" class="form-control" required />
+                                <span asp-validation-for="UYRUK" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="OgrenciBilgi.GUNCEL_TARIH" class="control-label">Güncel tarih</label>
-                                <input type="text" asp-for="OgrenciBilgi.GUNCEL_TARIH" class="form-control" required />
-                                <span asp-validation-for="OgrenciBilgi.GUNCEL_TARIH" class="text-danger"></span>
+                                <label asp-for="GUNCEL_TARIH" class="control-label">Güncel tarih</label>
+                                <input type="date" asp-for="GUNCEL_TARIH" class="form-control" required />
+                                <span asp-validation-for="GUNCEL_TARIH" class="text-danger"></span>
                             </div>
                         </fieldset>
 
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Ekle" class="btn btn-primary" />
+                <div class="form-group" style="margin-top:20px;">
+                    <input hidden name="ISLEM" value="2" />
+                    <input type="submit" value="Öğrençi Ekle" class="btn btn-primary" />
                 </div>
             </form>
         </div>

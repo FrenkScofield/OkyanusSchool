@@ -77,3 +77,10 @@
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
     width: 60%;
 }
+
+.spesificInputs {
+    border: none;
+    background-color: white;
+    width: 92%;
+    text-align: left;
+}

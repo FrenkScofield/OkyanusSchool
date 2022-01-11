@@ -1,0 +1,99 @@
+﻿@using OkyanusSchool.Models.VM
+@model OgrenciListVM
+@{
+    ViewData["Title"] = "EditOgrenciBilgi";
+    Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow my-4">
+            <div class="card-header py-4">
+                Ögrenci Ekle <form method="post"  asp-controller="OgrenciBilgi" asp-action="PullOgrenciBilgi">
+                                    <input hidden name="ISLEM" value="1" />
+                                    <input type="submit" value="Geri git" class="float-right btn btn-outline-secondary" />
+                                </form>     
+            </div>
+            <div class="card-body">
+                <form method="post" asp-action="CreateOgrenciBilgi" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-row">
+
+                        <div class="col-md-6">
+                            <fieldset class="radiogenel">
+                                <legend style="width: 24%;">Öğrenci özel bilgileri</legend>
+                                @foreach (var item in Model.OgrenciBilgis)
+                                {
+                                    <div class="form-group">
+                                        <label asp-for="@item.AD" class="control-label">İsim</label>
+                                        <input type="text" asp-for="@item.AD" class="form-control" required />
+                                        <span asp-validation-for="@item.AD" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                    <label asp-for="@item.SOYAD" class="control-label">Soyisim</label>
+                                    <input type="text" asp-for="@item.SOYAD" class="form-control" required />
+                                    <span asp-validation-for="@item.SOYAD" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@item.TC_KIMLIK" class="control-label">TC kimlik</label>
+                                    <input type="text" asp-for="@item.TC_KIMLIK" class="form-control" maxlength="11" required="required" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                    <span asp-validation-for="@item.TC_KIMLIK" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@item.DOGUM_TARIHI" class="control-label">Doğum tarihi</label>
+                                    <input type="date" asp-for="@item.DOGUM_TARIHI" class="form-control" required />
+                                    <span asp-validation-for="@item.DOGUM_TARIHI" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@item.DOGUM_YERI" class="control-label">Doğum yeri</label>
+                                    <input type="text" asp-for="@item.DOGUM_YERI" class="form-control" required />
+                                    <span asp-validation-for="@item.DOGUM_YERI" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@item.CEP_TELEFONU" class="control-label">Çeb telefonu</label>
+                                    <input type="text" asp-for="@item.CEP_TELEFONU" class="form-control" maxlength="11" required="required" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                    <span asp-validation-for="@item.CEP_TELEFONU" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@item.EV_TELEFONU" class="control-label">Ev telefonu</label>
+                                    <input type="text" asp-for="@item.EV_TELEFONU" class="form-control" maxlength="11" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                    <span asp-validation-for="@item.EV_TELEFONU" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@item.EMAIL" class="control-label">Email</label>
+                                    <input type="email" asp-for="@item.EMAIL" class="form-control" required />
+                                    <span asp-validation-for="@item.EMAIL" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@item.UYRUK" class="control-label">Uyruk</label>
+                                    <input type="text" asp-for="@item.UYRUK" class="form-control" required />
+                                    <span asp-validation-for="@item.UYRUK" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@item.GUNCEL_TARIH" class="control-label">Güncel tarih</label>
+                                    <input type="date" asp-for="@item.GUNCEL_TARIH" class="form-control" required />
+                                    <span asp-validation-for="@item.GUNCEL_TARIH" class="text-danger"></span>
+                                </div>
+                                }
+                                </fieldset>
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top:20px;">
+                        <input hidden name="ISLEM" value="3" />
+                        <input type="submit" value="Öğrençi Güncerle" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+}
+
+

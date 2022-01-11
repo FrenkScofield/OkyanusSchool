@@ -17,10 +17,10 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input hidden name="ISLEM" value="1" />
                         <div class="form-group ">
-                            <input type="submit" value="Ogrencileri Listele" class="btn btn-info" />
+                            <input type="submit" value="Yenile" class="btn btn-info" />
                         </div>
                     </form>
-                    <a asp-action="CreateOgrenciBilgi" class="btn btn-outline-dark"  style=" height:36px;"><i class="fas fa-fw fa-plus"></i> Yeni Ogrenci Ekle</a>
+                    <a asp-action="CreateOgrenciBilgi" class="btn btn-outline-dark" style=" height:36px;"><i class="fas fa-fw fa-plus"></i> Yeni Ogrenci Ekle</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-shorting" id="dataTable">
@@ -42,20 +42,28 @@
                             {
                                 @foreach (var item in Model.OgrenciBilgis)
                                 {
-                            <tr>
-                                <th scope="row">@item.ID</th>
-                                <td>@item.AD</td>
-                                <td>@item.SOYAD</td>
-                                <td>@item.TC_KIMLIK</td>
-                                <td>@item.DOGUM_TARIHI</td>
-                                <td>@item.CEP_TELEFONU</td>
-                                <td>@item.EMAIL</td>
-                                <td>@item.ILK_KAYIT</td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn text-primary"><i class="fas fa-fw fa-pencil-alt"></i></a>
-                                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn text-warning" onclick="return confirm('Silmek istediğinizden emin misiniz?')"><i class="fas fa-fw fa-trash"></i></a>
-                                </td>
-                            </tr>
+                                    <tr>
+                                        <th scope="row">@item.ID</th>
+                                        <td>@item.AD</td>
+                                        <td>@item.SOYAD</td>
+                                        <td>@item.TC_KIMLIK</td>
+                                        <td>@item.DOGUM_TARIHI.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.CEP_TELEFONU</td>
+                                        <td>@item.EMAIL</td>
+                                        <td>@item.ILK_KAYIT.ToString("dd/MM/yyyy")</td>
+                                        <td>
+                                            <div style="display:flex">
+                                            <form class="btnForm" method="post" asp-action="EditOgrenciBilgi" asp-route-id="@item.ID">
+                                                <input hidden name="ISLEM" value="5" />
+                                                <button type="submit" class="fas fa-fw fa-pencil-alt updateBtn"> </button>
+                                            </form>
+                                            <form class="btnForm" method="post" asp-action="DeleteOgrenciBilgi" asp-route-id="@item.ID">
+                                                <input hidden name="ISLEM" value="4" />
+                                                <button type="submit" class="fas fa-fw fa-trash deleteBtn" onclick="return confirm('Silmek istediğinizden emin misiniz?')"> </button>
+                                            </form>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 }
                             }
                         </tbody>
@@ -65,6 +73,5 @@
         </div>
     </div>
 </div>
-
 
 

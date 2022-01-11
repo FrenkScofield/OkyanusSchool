@@ -84,3 +84,21 @@
     width: 92%;
     text-align: left;
 }
+
+.updateBtn {
+    border: none;
+    color: #4a70dc;
+    display: inline;
+    outline: none;
+    background-color: transparent;
+}
+.deleteBtn {
+    border: none;
+    color: #ffc107;
+    display: inline;
+    outline: none;
+    background-color: transparent;
+}
+.btnForm {
+    margin: 1px 26px;
+}

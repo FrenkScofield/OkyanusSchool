@@ -9,5 +9,6 @@ namespace OkyanusSchool.Models.VM
     public class OgrenciListVM
     {
         public OgrenciBilgi[] OgrenciBilgis { get; set; }
+        public List<OgrenciBilgi> OneOgrenci { get; set; }
     }
 }

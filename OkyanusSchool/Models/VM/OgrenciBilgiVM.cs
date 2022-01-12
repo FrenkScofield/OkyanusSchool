@@ -1,23 +1,12 @@
-﻿using OkyanusSchool.Models.BLL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace OkyanusSchool.Models.VM
 {
-    public class OgrenciListVM
+    public class OgrenciBilgiVM
     {
-        public OgrenciBilgi[] OgrenciBilgis { get; set; }
-
-        public OgrenciBilgi OgrenciBilgi { get; set; }
-
-
-        public IEnumerable<OgrenciBilgi> OgrenciBilgisl { get; set; }
-
-
-
-        //Edit OgrenciBilgi
         public string AD { get; set; }
         public string SOYAD { get; set; }
         public string TC_KIMLIK { get; set; }
@@ -26,9 +15,10 @@ namespace OkyanusSchool.Models.VM
         public string CEP_TELEFONU { get; set; }
         public string EV_TELEFONU { get; set; }
         public string EMAIL { get; set; }
+
         public string UYRUK { get; set; }
+
         public string GUNCEL_TARIH { get; set; }
 
-        //
     }
 }

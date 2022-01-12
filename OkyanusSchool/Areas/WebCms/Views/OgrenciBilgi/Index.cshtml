@@ -53,10 +53,12 @@
                                         <td>@item.ILK_KAYIT.ToString("dd/MM/yyyy")</td>
                                         <td>
                                             <div style="display:flex">
-                                            <form class="btnForm" method="post" asp-action="EditOgrenciBilgi" asp-route-id="@item.ID">
+                                            @*<form class="btnForm" method="get" asp-action="EditOgrenciBilgi" asp-route-id="@item.ID">
                                                 <input hidden name="ISLEM" value="5" />
                                                 <button type="submit" class="fas fa-fw fa-pencil-alt updateBtn"> </button>
-                                            </form>
+                                            </form>*@
+                                                <a asp-controller="OgrenciBilgi" asp-action="EditOgrenciBilgi" class="fas fa-fw fa-pencil-alt updateBtn" asp-route-id="@item.ID"></a>
+
                                             <form class="btnForm" method="post" asp-action="DeleteOgrenciBilgi" asp-route-id="@item.ID">
                                                 <input hidden name="ISLEM" value="4" />
                                                 <button type="submit" class="fas fa-fw fa-trash deleteBtn" onclick="return confirm('Silmek istediğinizden emin misiniz?')"> </button>

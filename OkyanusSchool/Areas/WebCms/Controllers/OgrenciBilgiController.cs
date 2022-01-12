@@ -26,7 +26,7 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
             _context = context;
             _ogrenciListVM = ogrenciListVM;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             OgrenciBilgi[] ogrenciListesi = null;
 
@@ -198,9 +198,8 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
             return RedirectToAction("Index");
         }
 
-
         [HttpGet]
-        public IActionResult EditOgrenciBilgi(int? ISLEM, int? ID)
+        public IActionResult EditOgrenciBilgi(int? ID, int? ISLEM = 5)
         {
             SqlParameter[] param = new SqlParameter[]
             {
@@ -238,118 +237,120 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
                 ogrenciListesi = JsonConvert.DeserializeObject<OgrenciBilgi[]>(TempData["Orgs"].ToString());
 
             }
-            _ogrenciListVM.OgrenciBilgis = ogrenciListesi;
+
+            _ogrenciListVM.OgrenciBilgi = ogrenciListesi[0];
 
             return View(_ogrenciListVM);
         }
 
         [HttpPost]
-        public IActionResult EditOgrenciBilgi(int? ISLEM, int? ID, string AD, string SOYAD, string TC_KIMLIK,
-
-                                                            string DOGUM_TARIHI, string DOGUM_YERI, string CEP_TELEFONU,
-
-                                                            string EV_TELEFONU, string EMAIL, string UYRUK, string GUNCEL_TARIH)
+        [ValidateAntiForgeryToken]
+        public IActionResult EditOgrenciBilgi(int? ISLEM, int? ID, OgrenciListVM vm)
         {
-            List<SqlParameter> paramInsert = new List<SqlParameter>
-           {
-                new SqlParameter()
-                {
-                    ParameterName = "ISLEM",
-                    SqlDbType = SqlDbType.Int,
-                    Direction = ParameterDirection.Input,
-                    IsNullable = true,
-                    Value = ISLEM
-                },
 
-                new SqlParameter()
-                {
-                    ParameterName = "ID",
-                    SqlDbType = SqlDbType.Int,
-                    Direction = ParameterDirection.Input,
-                    IsNullable = true,
-                    Value = ID
-                },
+         
+            List<SqlParameter> paramInsert = new List<SqlParameter>
+            {
                  new SqlParameter()
-                {
-                    ParameterName = "AD",
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input,
-                    IsNullable = true,
-                    Value = AD
-                },
+                 {
+                     ParameterName = "ISLEM",
+                     SqlDbType = SqlDbType.Int,
+                     Direction = ParameterDirection.Input,
+                     IsNullable = true,
+                     Value = ISLEM
+                 },
+
+                 new SqlParameter()
+                 {
+                     ParameterName = "ID",
+                     SqlDbType = SqlDbType.Int,
+                     Direction = ParameterDirection.Input,
+                     IsNullable = true,
+                     Value = ID
+                 },
                   new SqlParameter()
-                {
-                    ParameterName = "SOYAD",
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input,
-                    IsNullable = true,
-                    Value = SOYAD
-                },
-                  new SqlParameter()
-                {
-                    ParameterName = "TC_KIMLIK",
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input,
-                    IsNullable = true,
-                    Value = TC_KIMLIK
-                },
-                  new SqlParameter()
-                {
-                    ParameterName = "DOGUM_TARIHI",
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input,
-                    IsNullable = true,
-                    Value = DOGUM_TARIHI
-                },
-                  new SqlParameter()
-                {
-                    ParameterName = "DOGUM_YERI",
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input,
-                    IsNullable = true,
-                    Value = DOGUM_YERI
-                },
-                  new SqlParameter()
-                {
-                    ParameterName = "CEP_TELEFONU",
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input,
-                    IsNullable = true,
-                    Value = CEP_TELEFONU
-                },
-                  new SqlParameter()
-                {
-                    ParameterName = "EV_TELEFONU",
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input,
-                    IsNullable = true,
-                    Value = EV_TELEFONU
-                },
-                  new SqlParameter()
-                {
-                    ParameterName = "EMAIL",
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input,
-                    IsNullable = true,
-                    Value = EMAIL
-                },
-                  new SqlParameter()
-                {
-                    ParameterName = "UYRUK",
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input,
-                    IsNullable = true,
-                    Value = UYRUK
-                },
-                  new SqlParameter()
-                {
-                    ParameterName = "GUNCEL_TARIH",
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input,
-                    IsNullable = true,
-                    Value = GUNCEL_TARIH
-                }
-           };
+                 {
+                     ParameterName = "AD",
+                     SqlDbType = SqlDbType.NVarChar,
+                     Direction = ParameterDirection.Input,
+                     IsNullable = true,
+                     Value = vm.OgrenciBilgi.AD
+                 },
+                   new SqlParameter()
+                 {
+                     ParameterName = "SOYAD",
+                     SqlDbType = SqlDbType.NVarChar,
+                     Direction = ParameterDirection.Input,
+                     IsNullable = true,
+                     Value = vm.OgrenciBilgi.SOYAD
+                 },
+                   new SqlParameter()
+                 {
+                     ParameterName = "TC_KIMLIK",
+                     SqlDbType = SqlDbType.NVarChar,
+                     Direction = ParameterDirection.Input,
+                     IsNullable = true,
+                     Value = vm.OgrenciBilgi.TC_KIMLIK
+                 },
+                   new SqlParameter()
+                 {
+                     ParameterName = "DOGUM_TARIHI",
+                     SqlDbType = SqlDbType.NVarChar,
+                     Direction = ParameterDirection.Input,
+                     IsNullable = true,
+                     Value = vm.OgrenciBilgi.DOGUM_TARIHI
+                 },
+                   new SqlParameter()
+                 {
+                     ParameterName = "DOGUM_YERI",
+                     SqlDbType = SqlDbType.NVarChar,
+                     Direction = ParameterDirection.Input,
+                     IsNullable = true,
+                     Value = vm.OgrenciBilgi.DOGUM_YERI
+                 },
+                   new SqlParameter()
+                 {
+                     ParameterName = "CEP_TELEFONU",
+                     SqlDbType = SqlDbType.NVarChar,
+                     Direction = ParameterDirection.Input,
+                     IsNullable = true,
+                     Value = vm.OgrenciBilgi.CEP_TELEFONU
+                 },
+                   new SqlParameter()
+                 {
+                     ParameterName = "EV_TELEFONU",
+                     SqlDbType = SqlDbType.NVarChar,
+                     Direction = ParameterDirection.Input,
+                     IsNullable = true,
+                     Value = vm.OgrenciBilgi.EV_TELEFONU
+                 },
+                   new SqlParameter()
+                 {
+                     ParameterName = "EMAIL",
+                     SqlDbType = SqlDbType.NVarChar,
+                     Direction = ParameterDirection.Input,
+                     IsNullable = true,
+                     Value = vm.OgrenciBilgi.EMAIL
+                 },
+                   new SqlParameter()
+                 {
+                     ParameterName = "UYRUK",
+                     SqlDbType = SqlDbType.NVarChar,
+                     Direction = ParameterDirection.Input,
+                     IsNullable = true,
+                     Value = vm.OgrenciBilgi.UYRUK
+                 },
+                   new SqlParameter()
+                 {
+                     ParameterName = "GUNCEL_TARIH",
+                     SqlDbType = SqlDbType.NVarChar,
+                     Direction = ParameterDirection.Input,
+                     IsNullable = true,
+                     Value = vm.OgrenciBilgi.GUNCEL_TARIH
+                 }
+            };
+    
+
 
             string sql = $"EXEC sp_OgrenciBilgi @ISLEM, @ID, @AD," +
                 $" @SOYAD, @TC_KIMLIK ,@DOGUM_TARIHI, @DOGUM_YERI," +

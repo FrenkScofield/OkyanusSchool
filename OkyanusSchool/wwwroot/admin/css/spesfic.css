@@ -85,12 +85,13 @@
     text-align: left;
 }
 
-.updateBtn {
+.card-body .table-responsive table tbody tr div .updateBtn {
     border: none;
     color: #4a70dc;
     display: inline;
     outline: none;
     background-color: transparent;
+    text-decoration: none;
 }
 .deleteBtn {
     border: none;

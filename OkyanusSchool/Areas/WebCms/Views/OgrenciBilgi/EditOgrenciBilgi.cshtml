@@ -12,21 +12,18 @@
             <div class="card-header py-4">
                 Ögrenci Ekle <form method="post"  asp-controller="OgrenciBilgi" asp-action="PullOgrenciBilgi">
                                     <input hidden name="ISLEM" value="1" />
-                                    <input type="submit" id="btnlist" value="Geri git" class="float-right btn btn-outline-secondary" />
+                                    <input type="submit"  value="Geri git" class="float-right btn btn-outline-secondary" />
                                 </form>     
             </div>
             <div class="card-body">
                 <form method="post"  enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-row">
-
                         <div class="col-md-6">
                             <fieldset class="radiogenel">
                                 <legend style="width: 24%;">Öğrenci özel bilgileri</legend>
-                                @*@foreach (var item in Model.OgrenciBilgis)
-                                {*@
                                     <div class="form-group">
-                                        <label asp-for="@Model.AD" class="control-label">İsim</label>
+                                        <label asp-for="@Model.OgrenciBilgi.AD" class="control-label">İsim</label>
                                         <input type="text" asp-for="@Model.OgrenciBilgi.AD" class="form-control" required />
                                         <span asp-validation-for="@Model.OgrenciBilgi.AD" class="text-danger"></span>
                                     </div>
@@ -75,14 +72,12 @@
                                     <input type="date" asp-for="@Model.OgrenciBilgi.GUNCEL_TARIH" class="form-control" required />
                                     <span asp-validation-for="@Model.OgrenciBilgi.GUNCEL_TARIH" class="text-danger"></span>
                                 </div>
-                              @*}*@
                                 </fieldset>
-
                         </div>
                     </div>
                     <div class="form-group" style="margin-top:20px;">
                         <input hidden name="ISLEM" value="3" />
-                        <input type="submit" onclick="Listele()" value="Öğrençi Güncelle" class="btn btn-primary" />
+                        <input type="submit"  value="Öğrençi Güncelle" class="btn btn-primary" />
                     </div>
                 </form>
             </div>
@@ -94,23 +89,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 
-<script>
-   
-
-    const myTimeout = setTimeout(myGreeting, 2000);
-
-    function Listele() {
-        console.log('fsd')
-        document.getElementById("btnlist").on('cilck')
-    }
-
-    //function Listele() {
-    //    setTimeout(function () {
-    //        alert('sfds')
-    //        document.getElementById("btnlist").click();
-    //    }, 100);
-    }
-</script>
+    
 }
 
 

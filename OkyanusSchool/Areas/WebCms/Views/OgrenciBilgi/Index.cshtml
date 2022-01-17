@@ -17,7 +17,7 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input hidden name="ISLEM" value="1" />
                         <div class="form-group ">
-                            <input type="submit" value="Yenile" class="btn btn-info" />
+                            <input type="submit" id="xxx" data="1" value="Yenile" class="btn btn-info" />
                         </div>
                     </form>
                     <a asp-action="CreateOgrenciBilgi" class="btn btn-outline-dark" style=" height:36px;"><i class="fas fa-fw fa-plus"></i> Yeni Ogrenci Ekle</a>
@@ -53,16 +53,11 @@
                                         <td>@item.ILK_KAYIT.ToString("dd/MM/yyyy")</td>
                                         <td>
                                             <div style="display:flex">
-                                            @*<form class="btnForm" method="get" asp-action="EditOgrenciBilgi" asp-route-id="@item.ID">
-                                                <input hidden name="ISLEM" value="5" />
-                                                <button type="submit" class="fas fa-fw fa-pencil-alt updateBtn"> </button>
-                                            </form>*@
-                                                <a asp-controller="OgrenciBilgi" asp-action="EditOgrenciBilgi" class="fas fa-fw fa-pencil-alt updateBtn" asp-route-id="@item.ID"></a>
 
-                                            <form class="btnForm" method="post" asp-action="DeleteOgrenciBilgi" asp-route-id="@item.ID">
-                                                <input hidden name="ISLEM" value="4" />
-                                                <button type="submit" class="fas fa-fw fa-trash deleteBtn" onclick="return confirm('Silmek istediğinizden emin misiniz?')"> </button>
-                                            </form>
+                                                <a asp-controller="OgrenciBilgi" asp-action="EditOgrenciBilgi" class="fas fa-fw fa-pencil-alt updateBtn btnForm" asp-route-id="@item.ID"></a>
+                                                <a asp-controller="OgrenciBilgi" asp-action="DeleteOgrenciBilgi" asp-route-TC_KIMLIK="@item.TC_KIMLIK" class="btn text-warning" 
+                                                   onclick="return confirm('Silmek istediğinizden emin misiniz?')"><i class="fas fa-fw fa-trash"></i></a>
+                                               
                                             </div>
                                         </td>
                                     </tr>
@@ -75,5 +70,26 @@
         </div>
     </div>
 </div>
+
+@*<script src="~/admin/vendor/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        console.log("ready!");
+        var oldData = 1;
+        var newData = 1;
+        var value = document.getElementById("xxx").getAttribute("data");
+        console.log(value);
+        oldData = value;
+
+        if (oldData == newData) {
+
+            document.getElementById('xxx').click();
+
+            newData + 1;
+        }
+        
+        return false
+    });
+</script>*@
 
 

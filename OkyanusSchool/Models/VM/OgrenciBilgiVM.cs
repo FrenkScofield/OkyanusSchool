@@ -15,9 +15,7 @@ namespace OkyanusSchool.Models.VM
         public string CEP_TELEFONU { get; set; }
         public string EV_TELEFONU { get; set; }
         public string EMAIL { get; set; }
-
         public string UYRUK { get; set; }
-
         public string GUNCEL_TARIH { get; set; }
 
     }

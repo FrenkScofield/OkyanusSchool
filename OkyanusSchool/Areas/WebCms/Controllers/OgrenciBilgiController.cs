@@ -360,5 +360,51 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+        [HttpGet]
+        public IActionResult DeleteOgrenciBilgi(string TC_KIMLIK ,int? ISLEM = 4)
+        {
+            SqlParameter[] paramDelete = new SqlParameter[]
+            {
+                new SqlParameter()
+                {
+                    ParameterName = "ISLEM",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Input,
+                    IsNullable = true,
+                    Value = ISLEM
+                },
+
+                new SqlParameter()
+                {
+                    ParameterName = "TC_KIMLIK",
+                    SqlDbType = SqlDbType.NVarChar,
+                    Direction = ParameterDirection.Input,
+                    IsNullable = true,
+                    Value = TC_KIMLIK
+                }
+            };
+
+            string sql = $"EXEC sp_OgrenciBilgi @ISLEM, @TC_KIMLIK";
+
+            _context.Database.ExecuteSqlRaw(sql, paramDelete);
+            //var ogr = _context.OgrenciBilgis.FromSqlRaw(sql, param.ToArray()).ToList();
+
+            //_ogrenciListVM.OgrenciBilgis = ogr.ToArray();
+
+            //TempData["Orgs"] = JsonConvert.SerializeObject(_ogrenciListVM.OgrenciBilgis); ;
+
+            //OgrenciBilgi[] ogrenciListesi = null;
+
+            //if (TempData["Orgs"] != null)
+            //{
+            //    ogrenciListesi = JsonConvert.DeserializeObject<OgrenciBilgi[]>(TempData["Orgs"].ToString());
+            //}
+
+            //_ogrenciListVM.OgrenciBilgi = ogrenciListesi[0];
+
+            return View("index");
+        }
     }
 }

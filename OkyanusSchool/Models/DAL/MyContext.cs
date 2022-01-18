@@ -13,5 +13,6 @@ namespace OkyanusSchool.Models.DAL
         public MyContext(DbContextOptions<MyContext> options) : base(options) { }
 
         public DbSet<OgrenciBilgi> OgrenciBilgis { get; set; }
+        public DbSet<OgrenciVeliBilgi>  OgrenciVeliBilgis { get; set; }
     }
     }

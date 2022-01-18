@@ -18,6 +18,7 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
     [Route("WebCms/[controller]/[action]")]
     public class OgrenciBilgiController : Controller
     {
+        //path be connection for database. START
         private readonly MyContext _context;
         private readonly OgrenciListVM _ogrenciListVM;
 
@@ -26,6 +27,9 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
             _context = context;
             _ogrenciListVM = ogrenciListVM;
         }
+        //END
+
+        //the page in admin panel to show data. START
         public IActionResult Index()
         {
             OgrenciBilgi[] ogrenciListesi = null;
@@ -39,7 +43,9 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
 
             return View(_ogrenciListVM);
         }
+        //END
 
+        //The code, for pull data from SQL. POST section.  START
         [HttpPost]
         public IActionResult PullOgrenciBilgi(int? ISLEM)
         {
@@ -74,13 +80,16 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
 
             return RedirectToAction("Index"); 
         }
+        //END
 
+        //The code. For create new student, action. GET section. START
         [HttpGet]
         public  IActionResult CreateOgrenciBilgi()
         {
             return View();
         }
-
+        //END
+        //POST section. START
         [HttpPost]
         public IActionResult CreateOgrenciBilgi(int? ISLEM,  string AD, string SOYAD, string TC_KIMLIK,
 
@@ -197,7 +206,9 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
 
             return RedirectToAction("Index");
         }
+        //END
 
+        //The code. For edııt default student, action. GET section. START
         [HttpGet]
         public IActionResult EditOgrenciBilgi(int? ID, int? ISLEM = 5)
         {
@@ -242,7 +253,8 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
 
             return View(_ogrenciListVM);
         }
-
+        //END
+        //POST section. START
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditOgrenciBilgi(int? ISLEM, int? ID, OgrenciListVM vm)
@@ -360,10 +372,11 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
 
             return RedirectToAction("Index");
         }
+        //END
 
-
+        // the code.For delete default parent, action.GET section. START
         [HttpGet]
-        public IActionResult DeleteOgrenciBilgi(string TC_KIMLIK ,int? ISLEM = 4)
+        public IActionResult DeleteOgrenciBilgi(int? ID, int? ISLEM = 4)
         {
             SqlParameter[] paramDelete = new SqlParameter[]
             {
@@ -378,33 +391,19 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
 
                 new SqlParameter()
                 {
-                    ParameterName = "TC_KIMLIK",
+                    ParameterName = "ID",
                     SqlDbType = SqlDbType.NVarChar,
                     Direction = ParameterDirection.Input,
                     IsNullable = true,
-                    Value = TC_KIMLIK
+                    Value = ID
                 }
             };
 
-            string sql = $"EXEC sp_OgrenciBilgi @ISLEM, @TC_KIMLIK";
+            string sql = $"EXEC sp_OgrenciBilgi @ISLEM, @ID";
 
             _context.Database.ExecuteSqlRaw(sql, paramDelete);
-            //var ogr = _context.OgrenciBilgis.FromSqlRaw(sql, param.ToArray()).ToList();
-
-            //_ogrenciListVM.OgrenciBilgis = ogr.ToArray();
-
-            //TempData["Orgs"] = JsonConvert.SerializeObject(_ogrenciListVM.OgrenciBilgis); ;
-
-            //OgrenciBilgi[] ogrenciListesi = null;
-
-            //if (TempData["Orgs"] != null)
-            //{
-            //    ogrenciListesi = JsonConvert.DeserializeObject<OgrenciBilgi[]>(TempData["Orgs"].ToString());
-            //}
-
-            //_ogrenciListVM.OgrenciBilgi = ogrenciListesi[0];
-
-            return View("index");
+         
+            return View("Index");
         }
     }
 }

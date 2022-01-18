@@ -37,6 +37,7 @@ namespace OkyanusSchool
 
 
             services.AddScoped<OgrenciListVM>();
+            services.AddScoped<OgrenciVeliBilgiListVM>();
         }
 
 

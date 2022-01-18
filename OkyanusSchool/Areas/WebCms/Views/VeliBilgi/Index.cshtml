@@ -1,0 +1,75 @@
+﻿@using OkyanusSchool.Models.VM
+@model OgrenciVeliBilgiListVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-4">
+                Veli listesi
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between my-3">
+                    <form method="post" asp-action="PullOgrenciVeliBilgi">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input hidden name="ISLEM" value="1" />
+                        <div class="form-group ">
+                            <input type="submit" id="xxx" data="1" value="Yenile" class="btn btn-info" />
+                        </div>
+                    </form>
+                    <a asp-action="CreateOgrVeliBilgi" class="btn btn-outline-dark" style=" height:36px;"><i class="fas fa-fw fa-plus"></i> Yeni Veli Ekle</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-shorting" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">AD</th>
+                                <th scope="col">SOYAD</th>
+                                <th scope="col">TC KİMLİK</th>
+                                <th scope="col">İLİSKİ DURUMU</th>
+                                <th scope="col">DOGUM TARİHİ</th>
+                                <th scope="col">CEP TELEFONU 1</th>
+                                <th scope="col">EMAİL</th>
+                                <th scope="col">MESLEK</th>
+                                <th scope="col">GUNCERLE - SİL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (TempData["Orgs"] != null)
+                            {
+                                @foreach (var item in Model.OgrenciVeliBilgis)
+                                {
+                            <tr>
+                                <th scope="row">@item.ID</th>
+                                <td>@item.AD</td>
+                                <td>@item.SOYAD</td>
+                                <td>@item.TC_KIMLIK</td>
+                                <td>@item.ILISKI_DURUMU</td>
+                                <td>@item.DOGUM_TARIHI.ToString("dd/MM/yyyy")</td>
+                                <td>@item.CEP_TELEFONU_1</td>
+                                <td>@item.EMAIL</td>
+                                <td>@item.MESLEK</td>
+                                <td>
+                                    <div style="display:flex">
+
+                                        <a asp-controller="VeliBilgi" asp-action="EditOgrenciVeliBilgi" class="fas fa-fw fa-pencil-alt updateBtn btnForm" asp-route-id="@item.ID"></a>
+                                        <a asp-controller="VeliBilgi" asp-action="DeleteOgrenciVeliBilgi" asp-route-id="@item.ID" class="btn text-warning" onclick="return confirm('Silmek istediğinizden emin misiniz?')"><i class="fas fa-fw fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -55,11 +55,10 @@
                                             <div style="display:flex">
 
                                                 <a asp-controller="OgrenciBilgi" asp-action="EditOgrenciBilgi" class="fas fa-fw fa-pencil-alt updateBtn btnForm" asp-route-id="@item.ID"></a>
-                                                <a asp-controller="OgrenciBilgi" asp-action="DeleteOgrenciBilgi" asp-route-TC_KIMLIK="@item.TC_KIMLIK" class="btn text-warning" 
-                                                   onclick="return confirm('Silmek istediğinizden emin misiniz?')"><i class="fas fa-fw fa-trash"></i></a>
+                                                <a asp-controller="OgrenciBilgi" asp-action="DeleteOgrenciBilgi" asp-route-id="@item.ID" class="btn text-warning" onclick="return confirm('Silmek istediğinizden emin misiniz?')"><i class="fas fa-fw fa-trash"></i></a>
                                                
                                             </div>
-                                        </td>
+                                        </td> 
                                     </tr>
                                 }
                             }
@@ -71,25 +70,28 @@
     </div>
 </div>
 
-@*<script src="~/admin/vendor/jquery/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+
 <script>
-    $(document).ready(function () {
-        console.log("ready!");
-        var oldData = 1;
-        var newData = 1;
-        var value = document.getElementById("xxx").getAttribute("data");
-        console.log(value);
-        oldData = value;
+    var del = document.getElementsByClassName("text-warning");
 
-        if (oldData == newData) {
-
-            document.getElementById('xxx').click();
-
-            newData + 1;
-        }
-        
-        return false
-    });
-</script>*@
+    var refres = document.getElementById("xxx");
 
 
+        $(del).click(function () {
+            if (confirm() == ture ) {
+                alert("yess")
+            } else if (confirm() == false) {
+                setTimeout(() => {
+                    alert("noo")
+                    refres.click(function () {
+                        $(document).ready()
+                        return
+                    })
+                }, 2000)
+            };
+        });
+   
+
+   
+</script>

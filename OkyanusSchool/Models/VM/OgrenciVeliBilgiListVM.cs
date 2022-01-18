@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace OkyanusSchool.Models.VM
 {
-    public class OgrenciListVM
+    public class OgrenciVeliBilgiListVM
     {
-        public OgrenciBilgi[] OgrenciBilgis { get; set; }
 
-        public OgrenciBilgi OgrenciBilgi { get; set; }
+        public OgrenciVeliBilgi[] OgrenciVeliBilgis { get; set; }
+
+        public OgrenciVeliBilgi OgrenciVeliBilgi { get; set; }
     }
 }

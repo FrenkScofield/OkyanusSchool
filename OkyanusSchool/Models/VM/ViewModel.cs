@@ -8,7 +8,7 @@ namespace OkyanusSchool.Models.VM
 {
     public class ViewModel
     {
-        public IEnumerable<OgrenciBilgi> OgrenciBilgis { get; set; }
-        public OgrenciBilgi OgrenciBilgi { get; set; }
+    //    public IEnumerable<OgrenciBilgi> OgrenciBilgis { get; set; }
+    //    public OgrenciBilgi OgrenciBilgi { get; set; }
     }
 }

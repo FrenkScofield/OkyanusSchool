@@ -10,10 +10,10 @@
     <div class="card shadow my-4">
         <div class="card-header py-4">
             Ögrenci Ekle  
-                        <form method="post"  asp-controller="OgrenciBilgi" asp-action="PullOgrenciBilgi">
-                        <input hidden name="ISLEM" value="1" />
-                        <input type="submit" value="Geri Git" class="float-right btn btn-outline-secondary" />
-                        </form>
+            <form method="post"  asp-controller="OgrenciBilgi" asp-action="PullOgrenciBilgi">
+              <input hidden name="ISLEM" value="1" />
+              <input type="submit" value="Geri Git" class="float-right btn btn-outline-secondary" />
+            </form>
         </div>
         <div class="card-body">
             <form method="post" asp-action="CreateOgrenciBilgi" enctype="multipart/form-data">

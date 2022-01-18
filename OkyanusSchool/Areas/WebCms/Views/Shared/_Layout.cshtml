@@ -131,7 +131,10 @@
                             <input hidden name="ISLEM" value="1" />
                             <input type="submit" value="Öğrençi bilgi" class="collapse-item spesificInputs" />
                         </form>
-                        <a class="collapse-item" asp-area="WebCms" asp-controller="VeliBilgi" asp-action="Index">Veli bilgi </a>
+                        <form method="post" asp-area="WebCms" asp-controller="VeliBilgi" asp-action="PullOgrenciVeliBilgi">
+                            <input hidden name="ISLEM" value="1" />
+                            <input type="submit" value="Veli bilgi" class="collapse-item spesificInputs" />
+                        </form>
                         <a class="collapse-item" asp-area="WebCms" asp-controller="OgretmenBilgi" asp-action="Index">Öğretmen bilgi </a>
 
                     </div>

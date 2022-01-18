@@ -1,0 +1,125 @@
+﻿@using OkyanusSchool.Models.VM
+@model OgrenciVeliBilgiListVM
+@{
+    ViewData["Title"] = "EditOgrenciVeliBilgi";
+    Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow my-4">
+            <div class="card-header py-4">
+               Veli Günçerle
+                <form method="post" asp-controller="VeliBilgi" asp-action="PullOgrenciVeliBilgi">
+                    <input hidden name="ISLEM" value="1" />
+                    <input type="submit" value="Geri Git" class="float-right btn btn-outline-secondary" />
+                </form>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-action="EditOgrenciVeliBilgi" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-row">
+
+                        <div class="col-md-6">
+                            <fieldset class="radiogenel">
+                                <legend style="width: 24%;">Veli özel bilgileri</legend>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.YASAM_DURUMU" class="control-label">Yasam Durumu</label>
+                                    <input type="checkbox" asp-for="@Model.OgrenciVeliBilgi.YASAM_DURUMU" style=" width: 50px;" class="form-control" />
+                                   
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.TIPI" class="control-label">Tipi</label>
+                                    <input type="text" asp-for="@Model.OgrenciVeliBilgi.TIPI" class="form-control" required />
+                                    <span asp-validation-for="@Model.OgrenciVeliBilgi.TIPI" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.AD" class="control-label">İsim</label>
+                                    <input type="text" asp-for="@Model.OgrenciVeliBilgi.AD" class="form-control" required />
+                                    <span asp-validation-for="@Model.OgrenciVeliBilgi.AD" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.SOYAD" class="control-label">Soyisim</label>
+                                    <input type="text" asp-for="@Model.OgrenciVeliBilgi.SOYAD" class="form-control" required />
+                                    <span asp-validation-for="@Model.OgrenciVeliBilgi.SOYAD" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.TC_KIMLIK" class="control-label">TC kimlik</label>
+                                    <input type="text" asp-for="@Model.OgrenciVeliBilgi.TC_KIMLIK" class="form-control" maxlength="11" required="required" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                    <span asp-validation-for="@Model.OgrenciVeliBilgi.TC_KIMLIK" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.ILISKI_DURUMU" class="control-label">Iliski Durumu</label>
+                                    <input type="text" asp-for="@Model.OgrenciVeliBilgi.ILISKI_DURUMU" class="form-control" required />
+                                    <span asp-validation-for="@Model.OgrenciVeliBilgi.ILISKI_DURUMU" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.DOGUM_TARIHI" class="control-label">Doğum tarihi</label>
+                                    <input type="date" asp-for="@Model.OgrenciVeliBilgi.DOGUM_TARIHI" class="form-control" required />
+                                    <span asp-validation-for="@Model.OgrenciVeliBilgi.DOGUM_TARIHI" class="text-danger"></span>
+                                </div>
+
+                            </fieldset>
+
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <fieldset class="radiogenel">
+                                <legend style="width: 24%;">İletişim bilgileri</legend>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.DOGUM_YERI" class="control-label">Doğum yeri</label>
+                                    <input type="text" asp-for="@Model.OgrenciVeliBilgi.DOGUM_YERI" class="form-control" required />
+                                    <span asp-validation-for="@Model.OgrenciVeliBilgi.DOGUM_YERI" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.CEP_TELEFONU_1" class="control-label">Çeb telefonu 1</label>
+                                    <input type="text" asp-for="@Model.OgrenciVeliBilgi.CEP_TELEFONU_1" class="form-control" maxlength="11" required="required" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                    <span asp-validation-for="@Model.OgrenciVeliBilgi.CEP_TELEFONU_1" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.CEP_TELEFONU_2" class="control-label">Çeb telefonu 2</label>
+                                    <input type="text" asp-for="@Model.OgrenciVeliBilgi.CEP_TELEFONU_2" class="form-control" maxlength="11" required="required" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                    <span asp-validation-for="@Model.OgrenciVeliBilgi.CEP_TELEFONU_2" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.IS_TELEFONU" class="control-label">Ev telefonu</label>
+                                    <input type="text" asp-for="@Model.OgrenciVeliBilgi.IS_TELEFONU" class="form-control" maxlength="11" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                    <span asp-validation-for="@Model.OgrenciVeliBilgi.IS_TELEFONU" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.EMAIL" class="control-label">Email</label>
+                                    <input type="email" asp-for="@Model.OgrenciVeliBilgi.EMAIL" class="form-control" required />
+                                    <span asp-validation-for="@Model.OgrenciVeliBilgi.EMAIL" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.UYRUK" class="control-label">Uyruk</label>
+                                    <input type="text" asp-for="@Model.OgrenciVeliBilgi.UYRUK" class="form-control" required />
+                                    <span asp-validation-for="@Model.OgrenciVeliBilgi.UYRUK" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.OgrenciVeliBilgi.MESLEK" class="control-label">Meslek</label>
+                                    <input type="text" asp-for="@Model.OgrenciVeliBilgi.MESLEK" class="form-control" required />
+                                    <span asp-validation-for="@Model.OgrenciVeliBilgi.MESLEK" class="text-danger"></span>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px; float: right;">
+                        <input hidden name="ISLEM" value="3" />
+                        <input type="submit" value="Veli Günçerle" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+}
+
+

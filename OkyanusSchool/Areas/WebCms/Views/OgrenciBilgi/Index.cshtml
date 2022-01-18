@@ -55,8 +55,7 @@
                                             <div style="display:flex">
 
                                                 <a asp-controller="OgrenciBilgi" asp-action="EditOgrenciBilgi" class="fas fa-fw fa-pencil-alt updateBtn btnForm" asp-route-id="@item.ID"></a>
-                                                <a asp-controller="OgrenciBilgi" asp-action="DeleteOgrenciBilgi" asp-route-TC_KIMLIK="@item.TC_KIMLIK" class="btn text-warning" 
-                                                   onclick="return confirm('Silmek istediğinizden emin misiniz?')"><i class="fas fa-fw fa-trash"></i></a>
+                                                <a asp-controller="OgrenciBilgi" asp-action="DeleteOgrenciBilgi" asp-route-id="@item.ID" class="btn text-warning" onclick="return confirm('Silmek istediğinizden emin misiniz?')"><i class="fas fa-fw fa-trash"></i></a>
                                                
                                             </div>
                                         </td>

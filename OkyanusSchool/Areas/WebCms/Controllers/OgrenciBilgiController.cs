@@ -363,7 +363,7 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
 
 
         [HttpGet]
-        public IActionResult DeleteOgrenciBilgi(string TC_KIMLIK ,int? ISLEM = 4)
+        public IActionResult DeleteOgrenciBilgi(int? ID, int? ISLEM = 4)
         {
             SqlParameter[] paramDelete = new SqlParameter[]
             {
@@ -378,15 +378,15 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
 
                 new SqlParameter()
                 {
-                    ParameterName = "TC_KIMLIK",
+                    ParameterName = "ID",
                     SqlDbType = SqlDbType.NVarChar,
                     Direction = ParameterDirection.Input,
                     IsNullable = true,
-                    Value = TC_KIMLIK
+                    Value = ID
                 }
             };
 
-            string sql = $"EXEC sp_OgrenciBilgi @ISLEM, @TC_KIMLIK";
+            string sql = $"EXEC sp_OgrenciBilgi @ISLEM, @ID";
 
             _context.Database.ExecuteSqlRaw(sql, paramDelete);
             //var ogr = _context.OgrenciBilgis.FromSqlRaw(sql, param.ToArray()).ToList();
@@ -404,7 +404,7 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
 
             //_ogrenciListVM.OgrenciBilgi = ogrenciListesi[0];
 
-            return View("index");
+            return View("Index");
         }
     }
 }

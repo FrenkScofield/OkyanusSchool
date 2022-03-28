@@ -1,0 +1,176 @@
+﻿
+Guihupdan projeyi cekdikden sonra  MSSQL'e baglaniyoruz, Sonra Add-Migration  yapdikdan sonra bu isimde "sp_OgrenciBilgi" Precedure create edib icerisine asaqidaki konlari Copy Paste edirik.
+
+=====================================================================================================================================================
+
+
+USE [School]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_OgrenciBilgi]    Script Date: 3/22/2022 10:25:01 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[sp_OgrenciBilgi] 
+	@ISLEM					    INT				= NULL,
+	@ID			                INT			    = NULL,
+	@AD				            NVARCHAR(MAX)		= NULL,
+	@SOYAD			        	NVARCHAR(MAX)		= NULL,
+	@TC_KIMLIK			    	NVARCHAR(MAX)		= NULL,
+	@DOGUM_TARIHI				datetime2(7)	= NULL,
+	@DOGUM_YERI				    NVARCHAR(MAX)	= NULL,
+	@CEP_TELEFONU		     	NVARCHAR(MAX)    = NULL,
+	@EV_TELEFONU		     	NVARCHAR(MAX)	= NULL,
+	@EMAIL			         	NVARCHAR(MAX)   = NULL,
+	@UYRUK			            NVARCHAR(MAX)	= NULL,
+	@GUNCEL_TARIH				datetime2(7)		    = NULL
+AS
+BEGIN
+
+IF @ISLEM = 1
+  BEGIN
+  SELECT * FROM OgrenciBilgis
+  END
+
+	IF @ISLEM = 2
+	BEGIN
+	INSERT INTO OgrenciBilgis(AD,SOYAD,TC_KIMLIK,DOGUM_TARIHI,DOGUM_YERI,CEP_TELEFONU,EV_TELEFONU,EMAIL,UYRUK,GUNCEL_TARIH) VALUES(
+	                           
+                                     @AD ,
+									 @SOYAD,
+									 @TC_KIMLIK,
+									 @DOGUM_TARIHI,
+									 @DOGUM_YERI,
+									 @CEP_TELEFONU,
+									 @EV_TELEFONU,
+								     @EMAIL,
+									 @UYRUK,
+									 @GUNCEL_TARIH
+                                    )
+
+END
+
+IF @ISLEM = 3
+    BEGIN
+     UPDATE OgrenciBilgis SET
+	                          AD = @AD,
+							  SOYAD = @SOYAD,
+							  --TC_KIMLIK = @TC_KIMLIK,
+							  DOGUM_TARIHI = @DOGUM_TARIHI,
+							  DOGUM_YERI = @DOGUM_YERI,
+							  CEP_TELEFONU = @CEP_TELEFONU,
+							  EV_TELEFONU = @EV_TELEFONU,
+							  EMAIL = @EMAIL,
+							  UYRUK = @UYRUK,
+							  GUNCEL_TARIH = @GUNCEL_TARIH WHERE TC_KIMLIK = @TC_KIMLIK
+	                           
+
+	END
+
+	IF @ISLEM = 4
+	BEGIN
+	    DELETE FROM OgrenciBilgis WHERE ID = @ID
+	 
+	END
+
+	IF @ISLEM = 5
+	BEGIN
+	 SELECT * FROM OgrenciBilgis WHERE ID = @ID
+
+	 END
+
+END
+==================================================================================================================================
+
+Guihupdan projeyi cekdikden sonra  MSSQL'e baglaniyoruz, Sonra Add-Migration  yapdikdan sonra bu isimde "sp_OgrVeliBilgi" Precedure create edib icerisine asaqidaki konlari Copy Paste edirik.
+
+==================================================================================================================================
+USE [School]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_OgrenciBilgi]    Script Date: 4/1/2022 11:19:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE OR ALTER PROCEDURE [dbo].[sp_OgrVeliBilgi] 
+	@ISLEM					    INT				    = NULL,
+	@ID			                INT			        = NULL,
+	@YASAM_DURUMU               BIT                 = NULL,
+	@TIPI                       NVARCHAR(MAX)       = NULL,
+	@AD				            NVARCHAR(MAX)		= NULL,
+	@SOYAD			        	NVARCHAR(MAX)		= NULL,
+	@TC_KIMLIK			    	NVARCHAR(MAX)		= NULL,
+	@ILISKI_DURUMU              NVARCHAR(MAX)       = NULL,
+	@DOGUM_TARIHI				datetime2(7)	= NULL,
+	@DOGUM_YERI				    NVARCHAR(MAX)	= NULL,
+	@CEP_TELEFONU_1             NVARCHAR(MAX)    = NULL,
+	@CEP_TELEFONU_2		     	NVARCHAR(MAX)    = NULL,
+	@IS_TELEFONU		     	NVARCHAR(MAX)	= NULL,
+	@EMAIL			         	NVARCHAR(MAX)   = NULL,
+	@UYRUK			            NVARCHAR(MAX)	= NULL,
+	@MESLEK				        NVARCHAR(MAX)	= NULL
+AS
+BEGIN
+
+IF @ISLEM = 1
+  BEGIN
+  SELECT * FROM OgrenciVeliBilgis
+  END
+
+	IF @ISLEM = 2
+	BEGIN
+	INSERT INTO OgrenciVeliBilgis(YASAM_DURUMU,TIPI,AD,SOYAD,TC_KIMLIK,ILISKI_DURUMU,DOGUM_TARIHI,DOGUM_YERI,CEP_TELEFONU_1,CEP_TELEFONU_2,IS_TELEFONU,EMAIL,UYRUK,MESLEK) VALUES(
+	                           
+                                     @YASAM_DURUMU,
+									 @TIPI,
+									 @AD ,
+									 @SOYAD,
+									 @TC_KIMLIK,
+									 @ILISKI_DURUMU,
+									 @DOGUM_TARIHI,
+									 @DOGUM_YERI,
+									 @CEP_TELEFONU_1,
+									 @CEP_TELEFONU_2,
+									 @IS_TELEFONU,
+								     @EMAIL,
+									 @UYRUK,
+									 @MESLEK
+                                    )
+
+END
+
+IF @ISLEM = 3
+    BEGIN
+     UPDATE OgrenciVeliBilgis SET
+	                                YASAM_DURUMU =  @YASAM_DURUMU,
+									TIPI = @TIPI,
+									AD = @AD ,
+									SOYAD = @SOYAD,
+									ILISKI_DURUMU = @ILISKI_DURUMU,
+									DOGUM_TARIHI = @DOGUM_TARIHI,
+									DOGUM_YERI = @DOGUM_YERI,
+								    CEP_TELEFONU_1 = @CEP_TELEFONU_1,
+									CEP_TELEFONU_2 = @CEP_TELEFONU_2,
+								    IS_TELEFONU = @IS_TELEFONU,
+								    EMAIL = @EMAIL,
+									UYRUK = @UYRUK,
+									MESLEK = @MESLEK WHERE TC_KIMLIK = @TC_KIMLIK
+	                           
+
+	END
+
+	IF @ISLEM = 4
+	BEGIN
+	    DELETE FROM OgrenciVeliBilgis WHERE ID = @ID
+	 
+	END
+
+	IF @ISLEM = 5
+	BEGIN
+	 SELECT * FROM OgrenciVeliBilgis WHERE ID = @ID
+
+	 END
+
+END

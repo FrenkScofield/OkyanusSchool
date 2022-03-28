@@ -5,7 +5,6 @@
     Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="row">
     <div class="col-md-12 my-4">
         <div class="card shadow mb-4">
@@ -13,15 +12,49 @@
                 Veli listesi
             </div>
             <div class="card-body">
-                <div class="d-flex justify-content-between my-3">
-                    <form method="post" asp-action="PullOgrenciVeliBilgi">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input hidden name="ISLEM" value="1" />
-                        <div class="form-group ">
-                            <input type="submit" id="xxx" data="1" value="Yenile" class="btn btn-info" />
-                        </div>
-                    </form>
-                    <a asp-action="CreateOgrVeliBilgi" class="btn btn-outline-dark" style=" height:36px;"><i class="fas fa-fw fa-plus"></i> Yeni Veli Ekle</a>
+                <div class="row">
+                    <div class="col-md-6">
+                        @if (Model.OgrenciVeliBilgis == null)
+                        {
+                            <!--Prosedürün manuel olarak çalıştırılması için, verileri denetleyiciye gönderen kod kismi. -->
+
+                            <!--<form id="refreshID" method="post" asp-action="PullOgrenciBilgi">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input hidden type="text" name="ISLEM" value="1" />
+                            <div class="form-group ">
+                                <input type="submit" data="1" value="Yenile" class="btn btn-info" />-->
+
+                            @*<button onclick="submitStudent()" type="submit" data="1" class="btn btn-info">Yenile</button>*@
+
+                            <!--</div>
+
+                            </form>-->
+                        }
+                        else
+                        {
+                            <h2 id="succesFull" style="color:#2ecc71">
+                                En Son Guncerlenme
+                                <img style="width: 27px; margin-left: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/
+                                                                          wD/AP+gvaeTAAACnUlEQVRIia2WS0hUYRTHf+eb0YzUoMiMSRhTysgXjkYu2rgJS7Q2bSwSIxeSoYKLNqHbIs
+                                                                          cei8ogiGwXlQ9oF0GL0MQH9CB8IGZGSuBMlDnXe1o4io6Oo5P/5Tnn/r7/Odx7zyeso8zu+hQRLRM4heAGUoK
+                                                                          pcYRRRbskMP9y8Nidr+EYslYwp7/ORYBrKlQCzvVMALbAM2NMQ1/ezbGIB2T31Jci+gRIiAAOlR+hfNDj7Vge
+                                                                          NCucv6+tQfR5FHCABJQXWT11l5cHlzrI6qktFpEOwBEFfLlsVM4MFjS3Lx2Q01/nUotPROd8lRR8sWhGb37Lp
+                                                                          AFQi6atggMIJFoqjQCS2V2fYoyOEuVoYsRB6rYkvsxOhqYsceI2DmOfjhYeZ2K5m3qRpwdrKUw4FJp2qkWZUZ
+                                                                          HiaOG33BV44tOYsnwM/VnVAQonnSjp0cC97gt44tOYDvipHmllyvKtqhNIN8C+tSAZ2128PtJIdfKJNZ0XxKc
+                                                                          zZfm4NHyP0b8/wnlxmYVOwjutTCqiJrl4BXxxLFVD9xmfmw7bqYLt2FtVWAHsDk1OW36GZicp2plFXvwBdpg4
+                                                                          zu85vmE4gMCIQRgOV/DG95GGscfMqUV5ED4d8FM93BoRHuxgxCjatV7RW99nro61EdD5jcx8hQx0Sva7mv04n
+                                                                          aNE+C27Ynfxy55lxvq9ITiLH1pwWTyKVD0x93MzcICHA7neCQPgMDGNgH8zT0fQzLztbILgPujLu/4N4Swwvw
+                                                                          VwW0TOfTh64/vSAQCDHu8rVWoB+3/gKnplwNPcuRhYtTJzeutLbNU2gcRNwmcMWt6f37LirTShVQOe5s5YTBp
+                                                                          wG7A2ALZEeRCDHg6FQ5hbxaIWNp2UgpYAqSy7tiiMCNIlTm0fyPVOhGP8A4o2+mE0AIuPAAAAAElFTkSuQmCC">
+                            </h2>
+                        }
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <a asp-action="CreateOgrVeliBilgi" class="btn btn-outline-dark" style="float:right; height:36px;"><i class="fas fa-fw fa-plus"></i> Yeni Veli Ekle</a>
+
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-shorting" id="dataTable">
@@ -32,7 +65,6 @@
                                 <th scope="col">SOYAD</th>
                                 <th scope="col">TC KİMLİK</th>
                                 <th scope="col">İLİSKİ DURUMU</th>
-                                <th scope="col">DOGUM TARİHİ</th>
                                 <th scope="col">CEP TELEFONU 1</th>
                                 <th scope="col">EMAİL</th>
                                 <th scope="col">MESLEK</th>
@@ -44,24 +76,24 @@
                             {
                                 @foreach (var item in Model.OgrenciVeliBilgis)
                                 {
-                            <tr>
-                                <th scope="row">@item.ID</th>
-                                <td>@item.AD</td>
-                                <td>@item.SOYAD</td>
-                                <td>@item.TC_KIMLIK</td>
-                                <td>@item.ILISKI_DURUMU</td>
-                                <td>@item.DOGUM_TARIHI.ToString("dd/MM/yyyy")</td>
-                                <td>@item.CEP_TELEFONU_1</td>
-                                <td>@item.EMAIL</td>
-                                <td>@item.MESLEK</td>
-                                <td>
-                                    <div style="display:flex">
+                                    <tr>
+                                        <th scope="row">@item.ID</th>
+                                        <td>@item.AD</td>
+                                        <td>@item.SOYAD</td>
+                                        <td>@item.TC_KIMLIK</td>
+                                        <td>@item.ILISKI_DURUMU</td>
+                                        <td>@item.CEP_TELEFONU_1</td>
+                                        <td>@item.EMAIL</td>
+                                        <td>@item.MESLEK</td>
+                                        <td>
+                                            <div style="display:flex">
 
-                                        <a asp-controller="VeliBilgi" asp-action="EditOgrenciVeliBilgi" class="fas fa-fw fa-pencil-alt updateBtn btnForm" asp-route-id="@item.ID"></a>
-                                        <a asp-controller="VeliBilgi" asp-action="DeleteOgrenciVeliBilgi" asp-route-id="@item.ID" class="btn text-warning" onclick="return confirm('Silmek istediğinizden emin misiniz?')"><i class="fas fa-fw fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
+                                                <a asp-controller="VeliBilgi" asp-action="EditOgrenciVeliBilgi" class="fas fa-fw fa-pencil-alt updateBtn btnForm" asp-route-id="@item.ID"></a>
+                                                <a asp-controller="VeliBilgi" asp-action="DeleteOgrenciVeliBilgi" asp-route-id="@item.ID" class="btn text-warning" onclick="return confirm('Silmek istediğinizden emin misiniz?')" style=" padding: 1px 0.75rem;"><i class="fas fa-fw fa-trash"></i></a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
                                 }
                             }
                         </tbody>
@@ -73,3 +105,18 @@
 </div>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+    setTimeout(
+        function () {
+            var refres = document.getElementById("succesFull");
+            refres.style.transition = "opacity " + 1 + "s";
+            refres.style.opacity = 0;
+            refres.addEventListener("transitionend", function () {
+                refres.style.display = "none";
+            });
+        }, 1200
+    );
+</script>

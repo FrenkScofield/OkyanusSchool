@@ -32,6 +32,8 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
         //the page in admin panel to show data. START
         public IActionResult Index()
         {
+            PullOgrenciBilgi();
+
             OgrenciBilgi[] ogrenciListesi = null;
 
             if (TempData["Orgs"] != null)
@@ -47,7 +49,7 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
 
         //The code, for pull data from SQL. POST section.  START
         [HttpPost]
-        public IActionResult PullOgrenciBilgi(int? ISLEM)
+        public async Task<IActionResult> PullOgrenciBilgi(int? ISLEM = 1)
         {
             SqlParameter[] param = new SqlParameter[] 
             {
@@ -402,8 +404,8 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
             string sql = $"EXEC sp_OgrenciBilgi @ISLEM, @ID";
 
             _context.Database.ExecuteSqlRaw(sql, paramDelete);
-         
-            return View("Index");
+
+            return RedirectToAction(nameof(Index));
         }
         //END
     }

@@ -9,10 +9,7 @@
     <div class="col-md-12 my-4">
         <div class="card shadow my-4">
             <div class="card-header py-4">
-                Ögrenci Ekle <form method="post"  asp-controller="OgrenciBilgi" asp-action="PullOgrenciBilgi">
-                                    <input hidden name="ISLEM" value="1" />
-                                    <input type="submit"  value="Geri git" class="float-right btn btn-outline-secondary" />
-                                </form>     
+                Ögrenci Guncerle  <a asp-action="Index" class="float-right btn btn-outline-secondary">Geri Git</a>
             </div>
             <div class="card-body">
                 <form method="post"  enctype="multipart/form-data">
@@ -33,7 +30,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="@Model.OgrenciBilgi.TC_KIMLIK" class="control-label">TC kimlik</label>
-                                    <input type="text" asp-for="@Model.OgrenciBilgi.TC_KIMLIK" class="form-control" maxlength="11" required="required" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                    <input type="text" asp-for="@Model.OgrenciBilgi.TC_KIMLIK" class="form-control"  />
                                     <span asp-validation-for="@Model.OgrenciBilgi.TC_KIMLIK" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
@@ -48,12 +45,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="@Model.OgrenciBilgi.CEP_TELEFONU" class="control-label">Çeb telefonu</label>
-                                    <input type="text" asp-for="@Model.OgrenciBilgi.CEP_TELEFONU" class="form-control" maxlength="11" required="required" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                    <input type="number" asp-for="@Model.OgrenciBilgi.CEP_TELEFONU" class="form-control" maxlength="11" required="required" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
                                     <span asp-validation-for="@Model.OgrenciBilgi.CEP_TELEFONU" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="@Model.OgrenciBilgi.EV_TELEFONU" class="control-label">Ev telefonu</label>
-                                    <input type="text" asp-for="@Model.OgrenciBilgi.EV_TELEFONU" class="form-control" maxlength="11" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                    <input type="number" asp-for="@Model.OgrenciBilgi.EV_TELEFONU" class="form-control" maxlength="11" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
                                     <span asp-validation-for="@Model.OgrenciBilgi.EV_TELEFONU" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">

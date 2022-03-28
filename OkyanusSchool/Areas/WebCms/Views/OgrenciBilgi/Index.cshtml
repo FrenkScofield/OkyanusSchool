@@ -12,15 +12,49 @@
                 Ogrenci listesi
             </div>
             <div class="card-body">
-                <div class="d-flex justify-content-between my-3">
-                    <form method="post" asp-action="PullOgrenciBilgi">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input hidden name="ISLEM" value="1" />
-                        <div class="form-group ">
-                            <input type="submit" id="xxx" data="1" value="Yenile" class="btn btn-info" />
-                        </div>
-                    </form>
-                    <a asp-action="CreateOgrenciBilgi" class="btn btn-outline-dark" style=" height:36px;"><i class="fas fa-fw fa-plus"></i> Yeni Ogrenci Ekle</a>
+                <div class="row">
+                    <div class="col-md-6">
+                        @if (Model.OgrenciBilgis == null)
+                        {
+                            <!--Prosedürün manuel olarak çalıştırılması için, verileri denetleyiciye gönderen kod kismi. -->
+
+                            <!--<form id="refreshID" method="post" asp-action="PullOgrenciBilgi">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input hidden type="text" name="ISLEM" value="1" />
+                            <div class="form-group ">
+                                <input type="submit" data="1" value="Yenile" class="btn btn-info" />-->
+
+                            @*<button onclick="submitStudent()" type="submit" data="1" class="btn btn-info">Yenile</button>*@
+
+                            <!--</div>
+
+                            </form>-->
+                        }
+                        else
+                        {
+                            <h2 id="succesFull" style="color:#2ecc71">
+                                En Son Guncerlenme
+                                <img style="width: 27px; margin-left: 12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/
+                                                                          wD/AP+gvaeTAAACnUlEQVRIia2WS0hUYRTHf+eb0YzUoMiMSRhTysgXjkYu2rgJS7Q2bSwSIxeSoYKLNqHbIs
+                                                                          cei8ogiGwXlQ9oF0GL0MQH9CB8IGZGSuBMlDnXe1o4io6Oo5P/5Tnn/r7/Odx7zyeso8zu+hQRLRM4heAGUoK
+                                                                          pcYRRRbskMP9y8Nidr+EYslYwp7/ORYBrKlQCzvVMALbAM2NMQ1/ezbGIB2T31Jci+gRIiAAOlR+hfNDj7Vge
+                                                                          NCucv6+tQfR5FHCABJQXWT11l5cHlzrI6qktFpEOwBEFfLlsVM4MFjS3Lx2Q01/nUotPROd8lRR8sWhGb37Lp
+                                                                          AFQi6atggMIJFoqjQCS2V2fYoyOEuVoYsRB6rYkvsxOhqYsceI2DmOfjhYeZ2K5m3qRpwdrKUw4FJp2qkWZUZ
+                                                                          HiaOG33BV44tOYsnwM/VnVAQonnSjp0cC97gt44tOYDvipHmllyvKtqhNIN8C+tSAZ2128PtJIdfKJNZ0XxKc
+                                                                          zZfm4NHyP0b8/wnlxmYVOwjutTCqiJrl4BXxxLFVD9xmfmw7bqYLt2FtVWAHsDk1OW36GZicp2plFXvwBdpg4
+                                                                          zu85vmE4gMCIQRgOV/DG95GGscfMqUV5ED4d8FM93BoRHuxgxCjatV7RW99nro61EdD5jcx8hQx0Sva7mv04n
+                                                                          aNE+C27Ynfxy55lxvq9ITiLH1pwWTyKVD0x93MzcICHA7neCQPgMDGNgH8zT0fQzLztbILgPujLu/4N4Swwvw
+                                                                          VwW0TOfTh64/vSAQCDHu8rVWoB+3/gKnplwNPcuRhYtTJzeutLbNU2gcRNwmcMWt6f37LirTShVQOe5s5YTBp
+                                                                          wG7A2ALZEeRCDHg6FQ5hbxaIWNp2UgpYAqSy7tiiMCNIlTm0fyPVOhGP8A4o2+mE0AIuPAAAAAElFTkSuQmCC">
+                            </h2>
+                        }
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <a asp-action="CreateOgrenciBilgi" class="btn btn-outline-dark" style="float:right; height:36px;"><i class="fas fa-fw fa-plus"></i> Yeni Ogrenci Ekle</a>
+
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-shorting" id="dataTable">
@@ -56,9 +90,9 @@
 
                                                 <a asp-controller="OgrenciBilgi" asp-action="EditOgrenciBilgi" class="fas fa-fw fa-pencil-alt updateBtn btnForm" asp-route-id="@item.ID"></a>
                                                 <a asp-controller="OgrenciBilgi" asp-action="DeleteOgrenciBilgi" asp-route-id="@item.ID" class="btn text-warning" onclick="return confirm('Silmek istediğinizden emin misiniz?')"><i class="fas fa-fw fa-trash"></i></a>
-                                               
+
                                             </div>
-                                        </td> 
+                                        </td>
                                     </tr>
                                 }
                             }
@@ -70,28 +104,39 @@
     </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
-    var del = document.getElementsByClassName("text-warning");
 
-    var refres = document.getElementById("xxx");
+    setTimeout(
+        function () {
+            var refres = document.getElementById("succesFull");
+            refres.style.transition = "opacity " + 1 + "s";
+            refres.style.opacity = 0;
+            refres.addEventListener("transitionend", function () {
+                refres.style.display = "none";
+            });
+        }, 1200
+    );
 
 
-        $(del).click(function () {
-            if (confirm() == ture ) {
-                alert("yess")
-            } else if (confirm() == false) {
-                setTimeout(() => {
-                    alert("noo")
-                    refres.click(function () {
-                        $(document).ready()
-                        return
-                    })
-                }, 2000)
-            };
-        });
-   
-
-   
+       // If you want to refresh this page with Ajax, you should open the comment lines of this section.
+        //function submitStudent() {
+        //    var data = $("#refreshID").serialize();
+        //    $.ajax({
+        //        type: 'POST',
+        //        url: '/WebCms/OgrenciBilgi/PullOgrenciBilgi',
+        //        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        //        data: data,
+        //        //success: function (result) {
+        //        //    alert('Successfully ');
+        //        //    console.log(result);
+        //        //},
+        //        //error: function () {
+        //        //    alert('Failed to Data');
+        //        //    console.log('Failed ');
+        //        //}
+        //    })
+        //}
 </script>

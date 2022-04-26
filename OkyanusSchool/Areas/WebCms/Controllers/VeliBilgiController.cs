@@ -87,7 +87,7 @@ namespace OkyanusSchool.Areas.WebCms.Controllers
         [HttpGet]
         public IActionResult CreateOgrVeliBilgi()
         {
-            return View();
+            return View();  
         }
         //END
         //POST section. START

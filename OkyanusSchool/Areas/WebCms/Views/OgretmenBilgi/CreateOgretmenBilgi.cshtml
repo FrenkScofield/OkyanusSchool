@@ -1,0 +1,98 @@
+﻿@model OkyanusSchool.Models.BLL.OgretmenBilgi
+
+@{
+    ViewData["Title"] = "CreateOgretmenBilgi";
+    Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow my-4">
+            <div class="card-header py-4">
+                Ogretmen Ekle <a asp-action="Index" class="float-right btn btn-outline-secondary">Geri Git</a>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-action="CreateOgretmenBilgi" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-row">
+
+                        <div class="col-md-6">
+                            <fieldset class="radiogenel">
+                                <legend style="width: 24%;">Ogretmen özel bilgileri</legend>
+
+                                <div class="form-group">
+                                    <label asp-for="AD" class="control-label">İsim</label>
+                                    <input type="text" asp-for="AD" class="form-control" required />
+                                    <span asp-validation-for="AD" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="SOYAD" class="control-label">Soyisim</label>
+                                    <input type="text" asp-for="SOYAD" class="form-control" required />
+                                    <span asp-validation-for="SOYAD" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="TC_KIMLIK" class="control-label">TC kimlik</label>
+                                    <input type="text" asp-for="TC_KIMLIK" class="form-control" maxlength="11" required="required" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                    <span asp-validation-for="TC_KIMLIK" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="DOGUM_TARIHI" class="control-label">Doğum tarihi</label>
+                                    <input type="date" asp-for="DOGUM_TARIHI" class="form-control" required />
+                                    <span asp-validation-for="DOGUM_TARIHI" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="DOGUM_YERI" class="control-label">Doğum yeri</label>
+                                    <input type="text" asp-for="DOGUM_YERI" class="form-control" required />
+                                    <span asp-validation-for="DOGUM_YERI" class="text-danger"></span>
+                                </div>
+
+                            </fieldset>
+
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <fieldset class="radiogenel">
+                                <legend style="width: 24%;">İletişim bilgileri</legend>
+                             
+                                <div class="form-group">
+                                    <label asp-for="CEP_TELEFONU_1" class="control-label">Çeb telefonu 1</label>
+                                    <input type="text" asp-for="CEP_TELEFONU_1" class="form-control" maxlength="11" required="required" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                    <span asp-validation-for="CEP_TELEFONU_1" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="CEP_TELEFONU_2" class="control-label">Çeb telefonu 2</label>
+                                    <input type="text" asp-for="CEP_TELEFONU_2" class="form-control" maxlength="11" required="required" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11)" />
+                                    <span asp-validation-for="CEP_TELEFONU_2" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="EMAIL" class="control-label">Email</label>
+                                    <input type="email" asp-for="EMAIL" class="form-control" required />
+                                    <span asp-validation-for="EMAIL" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="KONUM" class="control-label">Meslek</label>
+                                    <input type="text" asp-for="KONUM" class="form-control" required />
+                                    <span asp-validation-for="KONUM" class="text-danger"></span>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px; float: right;">
+                        <input hidden name="ISLEM" value="2" />
+                        <input type="submit" value="Ogretmen Ekle" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+}
+
+

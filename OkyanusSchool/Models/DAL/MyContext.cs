@@ -14,5 +14,6 @@ namespace OkyanusSchool.Models.DAL
 
         public DbSet<OgrenciBilgi> OgrenciBilgis { get; set; }
         public DbSet<OgrenciVeliBilgi>  OgrenciVeliBilgis { get; set; }
+        public DbSet<OgretmenBilgi> OgretmenBilgis { get; set; }
     }
     }

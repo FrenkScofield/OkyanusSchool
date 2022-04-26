@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace OkyanusSchool.Models.VM
 {
-    public class ViewModel
+    public class OgretmenBilgiVM
     {
-    //    public IEnumerable<OgrenciBilgi> OgrenciBilgis { get; set; }
-    //    public OgrenciBilgi OgrenciBilgi { get; set; }
+        public OgretmenBilgi[] OgretmenBilgis { get; set; }
+        public OgretmenBilgi OgretmenBilgi { get; set; }
     }
 }

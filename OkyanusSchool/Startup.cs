@@ -35,9 +35,11 @@ namespace OkyanusSchool
                 options.UseSqlServer(_configuration["ConnectionStrings:connect"]);
             });
 
-
+            //ViewModes to run, need service connection
             services.AddScoped<OgrenciListVM>();
             services.AddScoped<OgrenciVeliBilgiListVM>();
+            services.AddScoped<OgretmenBilgiVM>();
+
         }
 
 
